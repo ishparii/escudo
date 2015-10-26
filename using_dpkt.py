@@ -8,7 +8,7 @@ import dpkt
 f = open('tcp-http.pcap')
 pcap = dpkt.pcap.Reader(f)
 
-for ts, buf in pcap:        # For timestamp, packet length in the pcap file
+for ts, buf in pcap:        # For timestamp, packet in the pcap file
     eth = dpkt.ethernet.Ethernet(buf) # Extract into ethernet object
     ip = eth.data                     # packet.data is the IP object
     tcp = ip.data                     # packet.data.data is the TCP object
