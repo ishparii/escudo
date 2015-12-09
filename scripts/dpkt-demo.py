@@ -3,10 +3,12 @@
 # explanation of the process, see Jon Oberheide's tutorial at:
 # https://jon.oberheide.org/blog/2008/10/15/dpkt-tutorial-2-parsing-a-pcap-file/
 
+#!/usr/bin/python
+
 # python 2 library, doesn't work in python 3
 import dpkt
 
-f = open('tcp-http.pcap')
+f = open('../resources/dpkt-demo-tcp-http.pcap')
 pcap = dpkt.pcap.Reader(f)
 
 for ts, buf in pcap:        # For timestamp, packet in the pcap file

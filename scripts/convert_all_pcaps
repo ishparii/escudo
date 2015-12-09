@@ -2,5 +2,5 @@
 for pcap in *.pcap
 do
     echo "Converting file $pcap..."
-    ./convert_pcap "$pcap" "${pcap}.csv"
+    bash convert_pcap "$pcap" "${pcap}.csv"
 done
