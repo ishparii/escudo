@@ -1,4 +1,4 @@
-src,sep,dst,inframes,inbytes,outframes,outbytes,totalframes,totalbytes,relstart,duration
+src,<->,dest,in_frames,in_bytes,out_frames,out_bytes,total_frames,total_bytes,rel_start,duration
 220.20.200.164:20355,<->,84.236.193.94:http-alt,21112,31747024,0,0,21112,31747024,0.000003000,1.9944
 247.136.134.84:40443,<->,22.249.49.193:http,5769,8676576,0,0,5769,8676576,0.003426000,1.9944
 215.158.140.162:35663,<->,220.28.73.211:http,4008,5811949,0,0,4008,5811949,0.277408000,1.6792

@@ -1,4 +1,4 @@
-src,sep,dst,inframes,inbytes,outframes,outbytes,totalframes,totalbytes,relstart,duration
+src,<->,dest,in_frames,in_bytes,out_frames,out_bytes,total_frames,total_bytes,rel_start,duration
 112.7.79.190,<->,80.38.36.39,0,0,15,1080,15,1080,0.069369000,1.7452
 152.1.221.131,<->,20.213.77.127,0,0,14,840,14,840,0.117215000,1.7681
 82.162.132.166,<->,8.220.200.250,0,0,13,832,13,832,0.075399000,1.2498
