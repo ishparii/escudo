@@ -33,6 +33,7 @@ for row_index, row in ddos_df.iterrows():
 # Then drop all in_bytes, in_frames columns
 ddos_df = ddos_df.drop(['in_frames', 'in_bytes'], axis=1)
 ddos_df['traffic_rate'] = ddos_df['out_bytes'] / ddos_df['duration']
+ddos_df['label'] = 'ddos'
 
 # Saves the dataframe into a file for later use. The equivalent file-opening
 # code is:
