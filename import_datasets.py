@@ -7,12 +7,33 @@ import matplotlib.pyplot as plt
 
 print("Starting!")
 
-# Import both ddos and regular traffic
-ddos_df = pd.read_csv('../ddostrace.pcap.csv', header=TODO)
+names = ['src', '<->', 'dest', 'in_frames', 'in_bytes', 'out_frames', 'out_bytes', 'total_frames', 'total_bytes', 'rel_start', 'duration']
+to_drop = ['<->', 'total_bytes', 'total_frames']
 
-ddos_df.columns = ['src', '<->', 'dest', 'in_frames', 'in_bytes', 'out_frames', 'out_bytes', 'total_frames', 'total_bytes', 'rel_start', 'duration']
-ddos_df = ddos_df.drop('<->', 1)
-ddos_df = ddos_df.drop('total_frames', 'total_bytes', 1)
+# Import both ddos and regular traffic
+ddos_df = pd.read_csv('../ddostrace.pcap.csv', header=None, skiprows=5, names=names)
+ddos_df = ddos_df.drop(to_drop, axis=1)
+
+# Iterate through samples, reformatting any samples which contain only inbound
+# data such that they now express an 
+#       ip_address_B <- ip_address_A 
+# relationship as opposed to 
+#       ip_address_A -> ip_address_B
+for row_index, row in ddos_df.iterrows():
+    if row['in_bytes'] != 0:
+        ddos_df.loc[row_index, 'src'] = row['dest']
+        ddos_df.loc[row_index, 'dest'] = row['src']
+        ddos_df.loc[row_index, 'out_frames'] = row['in_frames']
+        ddos_df.loc[row_index, 'out_bytes'] = row['in_bytes']
+
+# Then drop all in_bytes, in_frames rows
+ddos_df = ddos_df.drop(['in_frames', 'in_bytes'], axis=1)
+
+
+# 1. Organize dataframe so that we have all entries as:
+#       src | dest | bytes from src to dest | frames from src to dest
+
+
 
 
 
@@ -30,8 +51,6 @@ ddos_df = ddos_df.drop('total_frames', 'total_bytes', 1)
 #           --
 #           Probably not. If there are multiple communication instances between
 #           two IPs, then we'll just have to aggregate them somehow. 
-
-
 
 # Extract additional features
 flags = ['syn', 'ack', 'fin', 'push', 'urgent', 'unreachable']
